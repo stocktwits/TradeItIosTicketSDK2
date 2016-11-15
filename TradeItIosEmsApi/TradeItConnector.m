@@ -15,6 +15,7 @@
 #import "TradeItBrokerListResult.h"
 #import "TradeItUpdateLinkRequest.h"
 #import "TradeItUpdateLinkResult.h"
+#import "UserAgent.h"
 
 @implementation TradeItConnector {
     BOOL runAsyncCompletionBlockOnMainThread;
@@ -300,6 +301,10 @@ NSString * USER_DEFAULTS_SUITE = @"TRADEIT";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         NSHTTPURLResponse *response;
         NSError *error;
+        
+        NSString* userAgent = [UserAgent getUserAgent];
+        [request addValue:userAgent forHTTPHeaderField:@"User-Agent"];
+
         NSData *responseJsonData = [NSURLConnection sendSynchronousRequest:request
                                                          returningResponse:&response
                                                                      error:&error];
