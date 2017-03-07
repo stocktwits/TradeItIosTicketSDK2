@@ -492,7 +492,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="viewPortfolioButtonTapped:" destination="RYJ-Wj-vSz" eventType="touchUpInside" id="Otc-HQ-FKP"/>
+                                    <action selector="actionButtonTapped:" destination="RYJ-Wj-vSz" eventType="touchUpInside" id="aBd-5J-Xtt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="You can now trade from that account or view your portfolio to see performance, news, and edit settings." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdx-Mj-pun">
@@ -520,7 +520,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Broker linked" id="KH4-0b-yDp"/>
                     <connections>
+                        <outlet property="actionButton" destination="gQ4-Vs-NfX" id="VkQ-Mg-Jq8"/>
                         <outlet property="brokerLabel" destination="a3c-rZ-ne5" id="8R3-x9-hdT"/>
+                        <outlet property="detailsLabel" destination="Kdx-Mj-pun" id="ATI-5N-qqz"/>
+                        <outlet property="statusLabel" destination="OtU-RI-lfi" id="GTZ-lv-lwk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5w-G1-Ay7" userLabel="First Responder" sceneMemberID="firstResponder"/>

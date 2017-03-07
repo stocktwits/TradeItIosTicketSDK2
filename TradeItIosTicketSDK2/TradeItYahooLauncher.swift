@@ -16,12 +16,24 @@ import UIKit
         }
     }
 
-    public func launchOAuthConfirmationScreen(fromViewController viewController: UIViewController,
-                                              withLinkedBroker linkedBroker: TradeItLinkedBroker) {
+//    public func launchOAuthConfirmationScreen(fromViewController viewController: UIViewController,
+//                                              withLinkedBroker linkedBroker: TradeItLinkedBroker) {
+//        let navController = self.viewControllerProvider.provideNavigationController(withRootViewStoryboardId: TradeItStoryboardID.yahooBrokerLinkedView)
+//
+//        if let brokerLinkedViewController = navController.viewControllers.last as? TradeItYahooBrokerLinkedViewController {
+//            brokerLinkedViewController.linkedBroker = linkedBroker
+//            viewController.present(navController, animated: true)
+//        }
+//    }
+
+    public func launchOAuthCompletionScreen(fromViewController viewController: UIViewController,
+                                            oAuthCallbackUrl: URL) {
+        let oAuthCallbackUrlParser = TradeItOAuthCallbackUrlParser(oAuthCallbackUrl: oAuthCallbackUrl)
+
         let navController = self.viewControllerProvider.provideNavigationController(withRootViewStoryboardId: TradeItStoryboardID.yahooBrokerLinkedView)
 
-        if let brokerLinkedViewController = navController.viewControllers.last as? TradeItYahooBrokerLinkedViewController {
-            brokerLinkedViewController.linkedBroker = linkedBroker
+        if let oAuthCompletionViewController = navController.viewControllers.last as? TradeItYahooOAuthCompletionViewController {
+            oAuthCompletionViewController.oAuthCallbackUrlParser = oAuthCallbackUrlParser
             viewController.present(navController, animated: true)
         }
     }

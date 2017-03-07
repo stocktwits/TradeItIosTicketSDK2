@@ -1,23 +1,22 @@
 import UIKit
 
-class TradeItOAuthCompletionViewController: TradeItViewController {
+@objc class TradeItYahooOAuthCompletionViewController: CloseableViewController {
+    @IBOutlet weak var brokerLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
-    @IBOutlet weak var actionButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    var alertManager = TradeItAlertManager()
-    var linkedBroker: TradeItLinkedBroker?
+    @IBOutlet weak var actionButton: UIButton!
+
     var oAuthCallbackUrlParser: TradeItOAuthCallbackUrlParser?
-    var delegate: TradeItOAuthCompletionViewControllerDelegate?
+    var delegate: TradeItYahooBrokerLinkedViewControllerDelegate?
 
     private let actionButtonTitleTextContinue = "Continue"
     private let actionButtonTitleTextTryAgain = "Try again"
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
-        precondition(self.oAuthCallbackUrlParser != nil, "TradeItSDK ERROR: oAuthCallbackUrlParser not set before loading TradeItOAuthCompletionViewController")
+        precondition(self.oAuthCallbackUrlParser != nil, "TradeItSDK ERROR: oAuthCallbackUrlParser not set before loading TradeItYahooOAuthCompletionViewController")
 
         guard let oAuthVerifier = self.oAuthCallbackUrlParser?.oAuthVerifier else {
             self.setFailureState(withMessage: "Could not complete broker linking. No OAuth verifier present in callback. Please try again.")
@@ -104,17 +103,11 @@ class TradeItOAuthCompletionViewController: TradeItViewController {
     // MARK: IBActions
 
     @IBAction func actionButtonTapped(_ sender: UIButton) {
-        if self.actionButton.title(for: .normal) == actionButtonTitleTextContinue {
-            delegate?.onContinue(fromOAuthCompletionViewViewController: self, linkedBroker: self.linkedBroker)
-        } else if self.actionButton.title(for: .normal) == actionButtonTitleTextTryAgain {
-            delegate?.onTryAgain(fromOAuthCompletionViewViewController: self)
-        }
+        delegate?.viewPortfolioButtonTapped(fromViewController: self)
+
     }
 }
 
-@objc protocol TradeItOAuthCompletionViewControllerDelegate {
-    func onContinue(fromOAuthCompletionViewViewController viewController: TradeItOAuthCompletionViewController,
-                    linkedBroker: TradeItLinkedBroker?)
-
-    func onTryAgain(fromOAuthCompletionViewViewController viewController: TradeItOAuthCompletionViewController)
+@objc protocol TradeItYahooBrokerLinkedViewControllerDelegate {
+    func viewPortfolioButtonTapped(fromViewController viewController: TradeItYahooOAuthCompletionViewController)
 }
