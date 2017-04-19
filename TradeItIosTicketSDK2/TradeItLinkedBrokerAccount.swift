@@ -10,7 +10,7 @@ private let linkedBrokerCache = TradeItLinkedBrokerCache()
     public var balance: TradeItAccountOverview?
     public var fxBalance: TradeItFxAccountOverview?
     public var positions: [TradeItPortfolioPosition] = []
-    unowned var linkedBroker: TradeItLinkedBroker
+    public unowned var linkedBroker: TradeItLinkedBroker
     var tradeItBalanceService: TradeItBalanceService
     var tradeItPositionService: TradeItPositionService
     var tradeService: TradeItTradeService
